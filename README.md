@@ -63,6 +63,6 @@ It supports team-based task assignment with session-based authentication.
 ### 1. Clone repo
 
 ```bash
-git clone https://github.com/your-username/task-management.git
-cd task-management
+git clone https://github.com/Kazim-developer/task-management-system.git
+cd task-management-system
 ```
