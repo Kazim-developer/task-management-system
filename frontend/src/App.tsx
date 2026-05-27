@@ -8,7 +8,11 @@ import {
 import LoginForm from "./components/auth/LoginForm";
 import SignupForm from "./components/auth/SignupForm";
 import ResetPasswordForm from "./components/auth/ResetPasswordForm";
-import HomePage from "./components/routePages/Home";
+import DashboardLayout from "./components/layout/DashboardLayout";
+import Dashboard from "./components/pages/Dashboard";
+import MyTasks from "./components/pages/MyTasks";
+import Teams from "./components/pages/Teams";
+import TeamDetails from "./components/pages/TeamDetail";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -17,8 +21,12 @@ const router = createBrowserRouter(
       <Route path="/auth/signup" element={<SignupForm />} />
       <Route path="/auth/reset-password" element={<ResetPasswordForm />} />
 
-      <Route>
-        <Route path="/" element={<HomePage />} />
+      <Route element={<DashboardLayout />}>
+        <Route path="/" element={<Dashboard />} />
+
+        <Route path="/my-tasks" element={<MyTasks />} />
+        <Route path="/teams" element={<Teams />} />
+        <Route path="teams/:id" element={<TeamDetails />} />
       </Route>
 
       <Route path="*" element={<h1>No such page found</h1>} />

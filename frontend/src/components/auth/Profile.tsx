@@ -1,8 +1,12 @@
-import { useState, useRef, useEffect } from "react";
-
+import clsx from "clsx";
+import { useAuthStore } from "../../store/auth.store";
+import { useState, useEffect, useRef } from "react";
 import Logout from "./Logout";
 
-export default function Profile({ isNavbar }: { isNavbar: boolean }) {
+export default function Profile() {
+  const userName = useAuthStore((s) => s.name);
+  const email = useAuthStore((s) => s.email);
+
   const [showMenu, setShowMenu] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
 
@@ -20,28 +24,18 @@ export default function Profile({ isNavbar }: { isNavbar: boolean }) {
   return (
     <section className="relative" ref={menuRef}>
       {/* Profile Button */}
-      <section
-        className={!isNavbar ? "flex flex-col gap-[1rem] mb-[1rem]" : "static"}
-      >
-        <button
-          onClick={() => setShowMenu((prev) => !prev)}
-          disabled={!isNavbar}
-        ></button>
-
-        {!isNavbar && (
-          <div className="flex flex-col justify-start gap-[0.5rem]">
-            <p className="text-center font-[500]"></p>
-            <p className="text-md text-gray-700 text-center"></p>
-
-            <hr className="text-gray-300 rounded-full" />
+      <section className={clsx("cursor-pointer")}>
+        <button onClick={() => setShowMenu((prev) => !prev)}>
+          <div className="h-10 w-10 border-2 border-gray-300 rounded-full flex justify-center items-center bg-gray-100">
+            {userName.charAt(0).toUpperCase()}
           </div>
-        )}
+        </button>
       </section>
 
-      {isNavbar && showMenu && (
+      {showMenu && (
         <section className="absolute right-0 mt-2 w-56 bg-white border border-gray-200 rounded-xl shadow-lg p-4 z-50 flex flex-col gap-[0.5rem]">
-          <p className="text-center font-[500]"></p>
-          <p className="text-sm text-gray-700 break-all text-center"></p>
+          <p className="text-center font-[500]">{userName}</p>
+          <p className="text-sm text-gray-700 break-all text-center">{email}</p>
 
           <hr className="text-gray-200 rounded-full" />
           <Logout />

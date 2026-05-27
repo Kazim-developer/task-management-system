@@ -50,11 +50,16 @@ model TeamMember {
   team Team @relation(fields: [teamId], references: [id], onDelete: Cascade)
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-  role String @default("member") 
+  role TeamRole @default(MEMBER) 
 
   createdAt DateTime @default(now())
 
   @@unique([teamId, userId])
+}
+
+enum TeamRole {
+  ADMIN
+  MEMBER
 }
 
 model Task {
