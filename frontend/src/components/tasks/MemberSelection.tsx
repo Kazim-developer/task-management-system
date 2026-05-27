@@ -22,7 +22,7 @@ export default function MemberSelection({ teamId, setFormData }: MemberGroups) {
   return (
     <select
       defaultValue=""
-      className="w-full p-2 rounded-lg border border-gray-300 focus:border-black"
+      className="w-full p-2 focus:outline-none border border-gray-300 focus:border-black rounded-lg"
       required
       onChange={(e) => {
         const value = e.target.value;

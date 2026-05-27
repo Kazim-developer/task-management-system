@@ -3,8 +3,11 @@ import Header from "./Header";
 
 import { Outlet } from "react-router-dom";
 import ProtectedRoute from "../ProtectedRoute";
+import useShowElementStore from "../../store/showElement.store";
+import AsidebarContainer from "../AsidebarContainer";
 
 export default function DashboardLayout() {
+  const showSidebar = useShowElementStore((s) => s.showSidebar);
   return (
     <ProtectedRoute>
       <div className="min-h-screen bg-gray-100 flex">
@@ -17,6 +20,7 @@ export default function DashboardLayout() {
             <Outlet />
           </main>
         </div>
+        {showSidebar && <AsidebarContainer />}
       </div>
     </ProtectedRoute>
   );

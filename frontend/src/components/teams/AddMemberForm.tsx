@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import useShowElementStore from "../../store/showElement.store";
 import { useQueryClient } from "@tanstack/react-query";
 import { useMutation } from "@tanstack/react-query";
@@ -17,6 +17,9 @@ type AddMemberProp = {
 
 export default function AddMemberForm({ teamId }: AddMemberProp) {
   const [formData, setFormData] = useState<AddMemberState>({ email: "" });
+
+  const inputRef = useRef<HTMLInputElement>(null);
+
   const setShowAddMemberModal = useShowElementStore(
     (s) => s.setShowAddMemberModal,
   );
@@ -42,6 +45,10 @@ export default function AddMemberForm({ teamId }: AddMemberProp) {
     },
   });
 
+  useEffect(() => {
+    inputRef.current?.focus();
+  }, []);
+
   return (
     <form
       className="w-[30%] max-w-[500px] min-w-[300px] p-4 bg-white rounded-lg flex flex-col items-center gap-[1rem]"
@@ -55,7 +62,8 @@ export default function AddMemberForm({ teamId }: AddMemberProp) {
       <input
         type="text"
         placeholder="Enter email"
-        className="w-full p-2 rounded-lg border border-gray-100 focus:border-black"
+        ref={inputRef}
+        className="w-full p-2 focus:outline-none border border-gray-300 focus:border-black rounded-lg"
         value={formData.email}
         required
         onChange={(e) => setFormData({ email: e.target.value })}
