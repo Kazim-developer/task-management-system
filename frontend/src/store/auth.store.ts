@@ -4,49 +4,53 @@ import { persist } from "zustand/middleware";
 type AuthState = {
   email: string;
   name: string;
+  userId: string;
 
   isAuthenticated: boolean;
   authChecked: boolean;
   hydrated: boolean;
 
-  userId: string;
-
-  setAuthUser: (user: Partial<AuthState>) => void;
+  setAuthUser: (data: Partial<AuthState>) => void;
   resetAuthStore: () => void;
 };
 
 export const useAuthStore = create<AuthState>()(
   persist(
-    (set: any) => ({
+    (set) => ({
       email: "",
       name: "",
+      userId: "",
 
       isAuthenticated: false,
       authChecked: false,
       hydrated: false,
 
-      userId: "",
-
-      setAuthUser: (data: any) => set((state: any) => ({ ...state, ...data })),
+      setAuthUser: (data) =>
+        set((state) => ({
+          ...state,
+          ...data,
+        })),
 
       resetAuthStore: () =>
         set({
           email: "",
-          isAuthenticated: false,
-          authChecked: false,
+          name: "",
           userId: "",
+          isAuthenticated: false,
+          authChecked: true,
         }),
     }),
     {
       name: "auth-store",
 
-      partialize: (state: any) => ({
+      partialize: (state) => ({
         email: state.email,
-        isAuthenticated: state.isAuthenticated,
+        name: state.name,
         userId: state.userId,
+        isAuthenticated: state.isAuthenticated,
       }),
 
-      onRehydrateStorage: () => (state: any) => {
+      onRehydrateStorage: () => (state) => {
         state?.setAuthUser({ hydrated: true });
       },
     },

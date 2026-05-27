@@ -1,5 +1,3 @@
-"use client";
-
 import { useAuthStore } from "../store/auth.store";
 import { useQuery } from "@tanstack/react-query";
 import { checkAuth } from "../handlers/checkAuth";
@@ -17,8 +15,8 @@ export default function AuthLoader({
   const { data, isSuccess, isError } = useQuery({
     queryKey: ["me"],
     queryFn: checkAuth,
-    retry: false,
     enabled: hydrated && !authChecked,
+    retry: false,
     staleTime: 5 * 60 * 1000,
     refetchOnWindowFocus: false,
   });
@@ -26,32 +24,30 @@ export default function AuthLoader({
   useEffect(() => {
     if (!hydrated) return;
 
-    const user = data?.user;
-
-    if (isSuccess && user) {
+    if (isSuccess && data?.user) {
       setAuthUser({
-        userId: user.id,
-        email: user.email,
-        name: user.name,
+        userId: data.user.id,
+        email: data.user.email,
+        name: data.user.name,
         isAuthenticated: true,
         authChecked: true,
       });
+      return;
     }
 
     if (isError) {
       setAuthUser({
         userId: "",
-
         email: "",
-
+        name: "",
         isAuthenticated: false,
         authChecked: true,
       });
     }
-  }, [hydrated, isSuccess, isError, data]);
+  }, [hydrated, isSuccess, isError, data, setAuthUser]);
 
   if (!hydrated || !authChecked) {
-    return <h1>Loading ...</h1>;
+    return <h1>Loading...</h1>;
   }
 
   return <>{children}</>;

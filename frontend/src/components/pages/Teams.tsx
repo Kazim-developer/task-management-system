@@ -16,6 +16,10 @@ export default function Teams() {
     retry: false,
   });
 
+  if (isLoading) {
+    return <h1>Loading ...</h1>;
+  }
+
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
@@ -33,18 +37,14 @@ export default function Teams() {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-        {isLoading && !data ? (
-          <h1>Loading ...</h1>
-        ) : (
-          data.teams?.map((team: any) => (
-            <TeamCard
-              key={team.id}
-              name={team.name}
-              teamId={team.id}
-              members={team.members.length}
-            />
-          ))
-        )}
+        {data?.teams?.map((team: any) => (
+          <TeamCard
+            key={team.id}
+            name={team.name}
+            teamId={team.id}
+            members={team.members.length}
+          />
+        ))}
       </div>
       {showCreateTeamModal && <TeamModalContainer />}
     </div>

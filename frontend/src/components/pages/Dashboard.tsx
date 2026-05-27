@@ -22,10 +22,10 @@ export default function Dashboard() {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
-        <StatCard title="Total Tasks" value={data.totalTasks} />
-        <StatCard title="Completed" value={data.completedTasks} />
-        <StatCard title="Pending" value={data.pendingTasks} />
-        <StatCard title="Teams" value={data.totalTeams} />
+        <StatCard title="Total Tasks" value={data?.totalTasks ?? 0} />
+        <StatCard title="Completed" value={data?.completedTasks ?? 0} />
+        <StatCard title="Pending" value={data?.pendingTasks ?? 0} />
+        <StatCard title="Teams" value={data?.totalTeams ?? 0} />
       </div>
     </div>
   );

@@ -10,11 +10,13 @@ export default function ProtectedRoute({
   const authChecked = useAuthStore((s) => s.authChecked);
   const hydrated = useAuthStore((s) => s.hydrated);
 
-  if (hydrated && authChecked && !isAuthenticated) {
-    return <Navigate to="/auth/login" replace />;
+  if (!hydrated || !authChecked) {
+    return <h1>Loading...</h1>;
   }
 
-  if (!hydrated || !authChecked) return <h1>Loading ...</h1>;
+  if (!isAuthenticated) {
+    return <Navigate to="/auth/login" replace />;
+  }
 
   return <>{children}</>;
 }
