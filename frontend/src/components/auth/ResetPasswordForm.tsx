@@ -25,7 +25,7 @@ export default function ResetPasswordForm() {
     newPassword: "",
   });
 
-  const { mutate } = useMutation({
+  const { mutate, isPending } = useMutation({
     mutationFn: (formData: ResetPassword) =>
       postData("auth/reset-password", formData),
     onSuccess: (data) => {
@@ -100,7 +100,7 @@ export default function ResetPasswordForm() {
               "bg-black text-white p-3 text-bold cursor-pointer rounded-lg",
             )}
           >
-            Update Password
+            {isPending ? "Resetting" : "Reset"}
           </button>
         </form>
         <p className={clsx("mt-[1.5rem]")}>

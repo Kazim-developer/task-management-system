@@ -28,6 +28,7 @@ export default function MyTasks() {
       toast.success(data.message);
 
       queryClient.invalidateQueries({ queryKey: ["my-tasks"] });
+      queryClient.invalidateQueries({ queryKey: ["dashboard"] });
     },
     onError: (error) => {
       if (hasErrors(error)) {
