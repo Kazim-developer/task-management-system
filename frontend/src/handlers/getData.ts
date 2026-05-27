@@ -1,5 +1,5 @@
 export async function getData(route: string) {
-  const res = await fetch(`http://localhost:3000/${route}`, {
+  const res = await fetch(`${import.meta.env.VITE_API_URL}/${route}`, {
     credentials: "include",
   });
 
