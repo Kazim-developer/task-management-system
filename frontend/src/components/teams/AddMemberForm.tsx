@@ -26,7 +26,7 @@ export default function AddMemberForm({ teamId }: AddMemberProp) {
 
   const queryClient = useQueryClient();
 
-  const { mutate } = useMutation({
+  const { mutate, isPending } = useMutation({
     mutationFn: (formData: AddMemberState) => postData("add-member", formData),
     onSuccess: (data) => {
       toast.success(data.message);
@@ -80,7 +80,7 @@ export default function AddMemberForm({ teamId }: AddMemberProp) {
           type="submit"
           className="bg-indigo-600 text-white p-2 rounded-lg cursor-pointer"
         >
-          Add
+          {isPending ? "Adding..." : "Add"}
         </button>
       </div>
     </form>

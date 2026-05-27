@@ -28,7 +28,7 @@ export default function LoginForm() {
 
   const navigator = useNavigate();
 
-  const { mutate } = useMutation({
+  const { mutate, isPending } = useMutation({
     mutationFn: (formData: LoginData) => postData("auth/login", formData),
     onSuccess: (data) => {
       console.log(data);
@@ -114,7 +114,7 @@ export default function LoginForm() {
               "bg-black text-white p-3 text-bold cursor-pointer rounded-lg",
             )}
           >
-            Login
+            {isPending ? "Logging in..." : "Login"}
           </button>
         </form>
         <p className={clsx("mt-[1rem]")}>

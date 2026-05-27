@@ -22,7 +22,7 @@ export default function MyTasks() {
 
   const queryClient = useQueryClient();
 
-  const { mutate } = useMutation({
+  const { mutate, isPending } = useMutation({
     mutationFn: (formData: MyTasksState) => postData("update-task", formData),
     onSuccess: (data) => {
       toast.success(data.message);
@@ -89,7 +89,7 @@ export default function MyTasks() {
                   mutate({ taskId: task.id });
                 }}
               >
-                Mark as Done
+                {isPending ? "Pending..." : "Mark as Done"}
               </button>
             </div>
           </div>

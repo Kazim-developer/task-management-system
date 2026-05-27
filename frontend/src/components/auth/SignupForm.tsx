@@ -26,7 +26,7 @@ export default function SignupForm() {
 
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const { mutate } = useMutation({
+  const { mutate, isPending } = useMutation({
     mutationFn: (formData: SignupData) => postData("auth/signup", formData),
     onSuccess: (data) => {
       toast.success(data.message);
@@ -109,7 +109,7 @@ export default function SignupForm() {
               "bg-black text-white p-3 text-bold cursor-pointer rounded-lg",
             )}
           >
-            Sign Up
+            {isPending ? "Signing in..." : "Sign Up"}
           </button>
         </form>
         <p className={clsx("mt-[1rem]")}>

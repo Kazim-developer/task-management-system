@@ -22,7 +22,7 @@ export default function CreateTeamForm() {
 
   const queryClient = useQueryClient();
 
-  const { mutate } = useMutation({
+  const { mutate, isPending } = useMutation({
     mutationFn: (formData: CreateTeam) => postData("create-team", formData),
     onSuccess: (data) => {
       toast.success(data.message);
@@ -76,7 +76,7 @@ export default function CreateTeamForm() {
           type="submit"
           className="bg-indigo-600 text-white p-2 rounded-lg cursor-pointer"
         >
-          create
+          {isPending ? "Creating..." : "Create"}
         </button>
       </div>
     </form>

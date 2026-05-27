@@ -33,7 +33,7 @@ export default function AssignTaskForm({ teamId }: AssignTaskProp) {
 
   const queryClient = useQueryClient();
 
-  const { mutate } = useMutation({
+  const { mutate, isPending } = useMutation({
     mutationFn: (formData: AssignTaskState) =>
       postData("assign-task", formData),
     onSuccess: (data) => {
@@ -101,7 +101,7 @@ export default function AssignTaskForm({ teamId }: AssignTaskProp) {
           type="submit"
           className="bg-indigo-600 text-white p-2 rounded-lg cursor-pointer"
         >
-          Assign
+          {isPending ? "Assigning..." : "Assign"}
         </button>
       </div>
     </form>
