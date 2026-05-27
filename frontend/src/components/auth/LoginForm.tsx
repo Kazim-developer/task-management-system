@@ -31,9 +31,12 @@ export default function LoginForm() {
   const { mutate } = useMutation({
     mutationFn: (formData: LoginData) => postData("auth/login", formData),
     onSuccess: (data) => {
+      console.log(data);
       toast.success(data.message);
 
-      setAuthUser({ email: data.email });
+      setAuthUser({ email: data.user.email });
+      setAuthUser({ name: data.user.name });
+      setAuthUser({ userId: data.user.id });
       setAuthUser({ isAuthenticated: true });
 
       setFormData({ email: "", password: "" });

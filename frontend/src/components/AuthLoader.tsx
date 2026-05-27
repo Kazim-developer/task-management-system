@@ -30,8 +30,9 @@ export default function AuthLoader({
 
     if (isSuccess && user) {
       setAuthUser({
-        userId: user.userId,
+        userId: user.id,
         email: user.email,
+        name: user.name,
         isAuthenticated: true,
         authChecked: true,
       });
