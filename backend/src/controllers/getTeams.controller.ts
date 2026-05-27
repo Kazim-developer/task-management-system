@@ -3,7 +3,7 @@ import asyncHandler from "../middlewares/asyncHandler.middleware.js";
 import { prisma } from "../db/prisma.js";
 
 export const getTeams = asyncHandler(async (req: Request, res: Response) => {
-  const userId = req.user?.id;
+  const userId = String((req.user as any)?.id);
 
   const teams = await prisma.team.findMany({
     where: { createdById: userId },

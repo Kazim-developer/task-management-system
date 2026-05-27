@@ -25,7 +25,7 @@ const app = express();
 
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: true,
     credentials: true,
   }),
 );
@@ -45,8 +45,8 @@ app.use(
 
     cookie: {
       httpOnly: true,
-      secure: false,
-      sameSite: "lax",
+      secure: true,
+      sameSite: "none",
       maxAge: 1000 * 60 * 60 * 24,
     },
   }),
@@ -84,4 +84,10 @@ app.use(taskStatusRouter);
 
 app.use(errorHandler);
 
-app.listen(3000, () => console.log("server is running"));
+const PORT = process.env.PORT || 3000;
+
+app.listen(PORT, () => {
+  console.log(`server running on ${PORT}`);
+});
+
+app.listen(PORT, () => console.log("server is running"));

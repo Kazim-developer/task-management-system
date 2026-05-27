@@ -4,7 +4,7 @@ import { prisma } from "../db/prisma.js";
 
 export const getTeamMembers = asyncHandler(
   async (req: Request, res: Response) => {
-    const teamId = req.params.teamId;
+    const teamId = req.params.teamId as string;
 
     if (!teamId) {
       return;

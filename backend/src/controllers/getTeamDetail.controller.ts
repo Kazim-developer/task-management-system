@@ -4,7 +4,7 @@ import { prisma } from "../db/prisma.js";
 
 export const getTeamDetail = asyncHandler(
   async (req: Request, res: Response) => {
-    const teamId = req.params.id;
+    const teamId = req.params.id as string;
 
     const team = await prisma.team.findUnique({
       where: { id: teamId },
