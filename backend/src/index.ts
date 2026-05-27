@@ -13,19 +13,30 @@ import createTeamRouter from "./routes/createTeam.route.js";
 import connectPgSimple from "connect-pg-simple";
 import pg from "pg";
 
+import getTeamsRouter from "./routes/getTeams.route.js";
+import teamDetailRouter from "./routes/getTeamDetail.route.js";
+import addMemberRouter from "./routes/addMember.route.js";
+import getTeamMembersRouter from "./routes/teamMembers.route.js";
+import assignTaskRouter from "./routes/assignTask.route.js";
+import myTasksRouter from "./routes/getMyTasks.route.js";
+import dashboardRouter from "./routes/getStats.route.js";
+import taskStatusRouter from "./routes/updateTaskStatus.route.js";
+
+dotenv.config();
+
 const PgStore = connectPgSimple(session);
 
 const pool = new pg.Pool({
   connectionString: process.env.DATABASE_URL,
 });
 
-dotenv.config();
-
 const app = express();
+
+app.set("trust proxy", 1);
 
 app.use(
   cors({
-    origin: true,
+    origin: "https://task-management-system-beta-ashen.vercel.app",
     credentials: true,
   }),
 );
@@ -56,14 +67,6 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 import "./config/passport.js";
-import getTeamsRouter from "./routes/getTeams.route.js";
-import teamDetailRouter from "./routes/getTeamDetail.route.js";
-import addMemberRouter from "./routes/addMember.route.js";
-import getTeamMembersRouter from "./routes/teamMembers.route.js";
-import assignTaskRouter from "./routes/assignTask.route.js";
-import myTasksRouter from "./routes/getMyTasks.route.js";
-import dashboardRouter from "./routes/getStats.route.js";
-import taskStatusRouter from "./routes/updateTaskStatus.route.js";
 
 app.use("/auth", createUserRouter);
 app.use("/auth", loginRouter);
@@ -89,5 +92,3 @@ const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`server running on ${PORT}`);
 });
-
-app.listen(PORT, () => console.log("server is running"));

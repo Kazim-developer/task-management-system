@@ -6,14 +6,19 @@ import passport from "passport";
 const loginRouter = express.Router();
 
 loginRouter.post("/login", validateData(loginSchema), (req, res, next) => {
-  passport.authenticate("local", (err: any, user: any) => {
+  passport.authenticate("local", (err: any, user: any, info: any) => {
     if (err) return next(err);
+
     if (!user) {
-      return res.status(401).json({ message: "Invalid credentials" });
+      return res.status(401).json({
+        message: info?.message || "Invalid credentials",
+      });
     }
 
     req.logIn(user, (err) => {
       if (err) return next(err);
+
+      console.log("LOGIN SUCCESS - SESSION:", req.session);
 
       return res.json({
         message: "Login successful",
