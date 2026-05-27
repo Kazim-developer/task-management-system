@@ -13,6 +13,11 @@ export default function Teams() {
   const { data, isLoading } = useQuery({
     queryKey: ["get-teams"],
     queryFn: () => getData("teams"),
+    staleTime: 1000 * 60 * 5,
+    gcTime: 1000 * 60 * 30,
+
+    refetchOnWindowFocus: false,
+    refetchOnReconnect: false,
     retry: false,
   });
 

@@ -13,6 +13,12 @@ export default function MemberSelection({ teamId, setFormData }: MemberGroups) {
   const { data, isLoading } = useQuery({
     queryKey: ["team-members", teamId],
     queryFn: () => getData(`team-members/${teamId}`),
+    staleTime: 1000 * 60 * 5,
+    gcTime: 1000 * 60 * 30,
+
+    refetchOnWindowFocus: false,
+    refetchOnReconnect: false,
+    retry: false,
   });
 
   if (isLoading) {

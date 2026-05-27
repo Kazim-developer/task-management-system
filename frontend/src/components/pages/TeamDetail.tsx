@@ -22,6 +22,12 @@ export default function TeamDetails() {
   const { data, isLoading } = useQuery({
     queryKey: ["team", id],
     queryFn: () => getData(`team/${id}`),
+    staleTime: 1000 * 60 * 5,
+    gcTime: 1000 * 60 * 30,
+
+    refetchOnWindowFocus: false,
+    refetchOnReconnect: false,
+    retry: false,
   });
 
   const team = data ?? {};
