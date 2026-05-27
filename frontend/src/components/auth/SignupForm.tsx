@@ -70,7 +70,7 @@ export default function SignupForm() {
             ref={inputRef}
             value={formData.name}
             className={clsx(
-              "p-2 focus:outline-none border-1 border-[#ccc] rounded-lg",
+              "p-2 focus:outline-none border border-gray-300 focus:border-black rounded-lg",
             )}
             onChange={(e) => setFormData({ ...formData, name: e.target.value })}
             required
@@ -80,7 +80,7 @@ export default function SignupForm() {
             placeholder="Email"
             value={formData.email}
             className={clsx(
-              "p-2 focus:outline-none border-1 border-[#ccc] rounded-lg",
+              "p-2 focus:outline-none border border-gray-300 focus:border-black rounded-lg",
             )}
             onChange={(e) =>
               setFormData({ ...formData, email: e.target.value })
@@ -92,7 +92,7 @@ export default function SignupForm() {
             placeholder="Password"
             value={formData.password}
             className={clsx(
-              "p-2 focus:outline-none border-1 border-[#ccc] rounded-lg",
+              "p-2 focus:outline-none border border-gray-300 focus:border-black rounded-lg",
             )}
             onChange={(e) =>
               setFormData({ ...formData, password: e.target.value })

@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { postData } from "../../handlers/postData";
 import { toast } from "react-toastify";
 import { hasErrors } from "../../util/hasErrors.util";
@@ -24,6 +24,8 @@ export default function AssignTaskForm({ teamId }: AssignTaskProp) {
     dueDate: "",
     teamId: "",
   });
+
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const setShowAssignTaskModal = useShowElementStore(
     (s) => s.setShowAssignTaskModal,
@@ -52,6 +54,10 @@ export default function AssignTaskForm({ teamId }: AssignTaskProp) {
     },
   });
 
+  useEffect(() => {
+    inputRef.current?.focus();
+  }, []);
+
   return (
     <form
       className="w-[30%] max-w-[500px] min-w-[300px] p-4 bg-white rounded-lg flex flex-col items-center gap-[1rem]"
@@ -65,7 +71,8 @@ export default function AssignTaskForm({ teamId }: AssignTaskProp) {
       <input
         type="text"
         placeholder="Enter task"
-        className="w-full p-2 rounded-lg border border-gray-300 focus:border-black"
+        ref={inputRef}
+        className="w-full p-2 focus:outline-none border border-gray-300 focus:border-black rounded-lg"
         value={formData.task}
         required
         onChange={(e) => setFormData((s) => ({ ...s, task: e.target.value }))}
@@ -75,7 +82,7 @@ export default function AssignTaskForm({ teamId }: AssignTaskProp) {
         <p>Due date</p>
         <input
           type="date"
-          className="w-full p-2 rounded-lg border border-gray-300 focus:border-black"
+          className="w-full p-2 focus:outline-none border border-gray-300 focus:border-black rounded-lg"
           required
           onChange={(e) =>
             setFormData((s) => ({ ...s, dueDate: e.target.value }))

@@ -4,6 +4,7 @@ const storeFunc = (set: any) => ({
   showCreateTeamModal: false,
   showAddMemberModal: false,
   showAssignTaskModal: false,
+  showSidebar: false,
 
   setShowCreateTeamModal: (value: boolean) =>
     set({ showCreateTeamModal: value }),
@@ -12,6 +13,8 @@ const storeFunc = (set: any) => ({
 
   setShowAssignTaskModal: (value: boolean) =>
     set({ showAssignTaskModal: value }),
+
+  setShowSidebar: (value: boolean) => set({ showSidebar: value }),
 });
 
 const useShowElementStore = create(storeFunc);

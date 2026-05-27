@@ -26,7 +26,8 @@ export default function ResetPasswordForm() {
   });
 
   const { mutate } = useMutation({
-    mutationFn: (formData: ResetPassword) => postData("auth/signup", formData),
+    mutationFn: (formData: ResetPassword) =>
+      postData("auth/reset-password", formData),
     onSuccess: (data) => {
       toast.success(data.message);
       setFormData({ email: "", newPassword: "" });
@@ -60,6 +61,7 @@ export default function ResetPasswordForm() {
           className={clsx("flex flex-col gap-[1rem]")}
           onSubmit={(e) => {
             e.preventDefault();
+            console.log(formData);
             mutate(formData);
           }}
         >

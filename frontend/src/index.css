@@ -3,3 +3,7 @@
 .model-container {
   @apply h-full w-[100%] flex justify-center items-center fixed inset-0 bg-black/30 z-50 backdrop-blur-md;
 }
+
+.asidebar-container {
+  @apply fixed inset-0 bg-black/30 backdrop-blur-md z-50 flex justify-end min-[760px]:hidden;
+}

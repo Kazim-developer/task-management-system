@@ -17,7 +17,7 @@ const links = [
 
 export default function Sidebar() {
   return (
-    <aside className="w-64 bg-white border-r border-gray-200 p-5">
+    <aside className="w-64 bg-white border-r border-gray-200 p-5 max-[780px]:hidden">
       <h1 className="text-2xl font-bold mb-10">TaskFlow</h1>
 
       <nav className="flex flex-col gap-2">

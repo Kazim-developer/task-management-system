@@ -61,6 +61,9 @@ import teamDetailRouter from "./routes/getTeamDetail.route.js";
 import addMemberRouter from "./routes/addMember.route.js";
 import getTeamMembersRouter from "./routes/teamMembers.route.js";
 import assignTaskRouter from "./routes/assignTask.route.js";
+import myTasksRouter from "./routes/getMyTasks.route.js";
+import dashboardRouter from "./routes/getStats.route.js";
+import taskStatusRouter from "./routes/updateTaskStatus.route.js";
 
 app.use("/auth", createUserRouter);
 app.use("/auth", loginRouter);
@@ -69,20 +72,15 @@ app.use("/auth", resetPasswordRouter);
 app.use("/auth", meRouter);
 app.use("/auth", logoutRouter);
 
-// app.use((req, res, next) => {
-//   console.log("---- SESSION DEBUG ----");
-//   console.log("sessionID:", req.sessionID);
-//   console.log("session:", req.session);
-//   console.log("passport:", (req.session as any)?.passport);
-//   next();
-// });
-
 app.use(createTeamRouter);
 app.use(getTeamsRouter);
 app.use(teamDetailRouter);
 app.use(addMemberRouter);
 app.use(getTeamMembersRouter);
 app.use(assignTaskRouter);
+app.use(myTasksRouter);
+app.use(dashboardRouter);
+app.use(taskStatusRouter);
 
 app.use(errorHandler);
 

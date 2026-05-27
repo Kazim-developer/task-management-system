@@ -33,9 +33,9 @@ export default function TeamDetails() {
 
   return (
     <ProtectedRoute>
-      <div className="p-6 space-y-6">
+      <div className="space-y-6">
         {/* HEADER */}
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-between gap-2 max-[530px]:flex-col max-[530px]:items-start">
           <div>
             <h1 className="text-2xl font-bold">{data.name}</h1>
             <p className="text-gray-500">Team overview</p>
@@ -97,17 +97,28 @@ export default function TeamDetails() {
             data.tasks.map((t: any) => (
               <div
                 key={t.id}
-                className="flex justify-between p-2 border-b last:border-none"
+                className="flex flex-col gap-2 p-2 border-b last:border-none"
               >
-                <p>{t.title}</p>
-                <p>Assigned To: {t.assignedTo.name}</p>
-                <span
-                  className={`text-xs px-2 py-1 rounded ${
-                    t.status === "DONE" ? "bg-green-100" : "bg-yellow-100"
-                  }`}
-                >
-                  {t.status}
-                </span>
+                <div className="flex items-center justify-between gap-1 max-[580px]:flex-col max-[580px]:items-start">
+                  <div className="flex items-center gap-1 justify-between">
+                    <h2 className="font-semibold">Task: </h2>
+                    <h2>{t.title}</h2>
+                  </div>
+                  <div className="flex items-center gap-1 justify-between">
+                    <h2 className="font-semibold">Status: </h2>
+                    <span
+                      className={`text-xs px-2 py-1 rounded ${
+                        t.status === "DONE" ? "bg-green-300" : "bg-yellow-300"
+                      }`}
+                    >
+                      {t.status}
+                    </span>
+                  </div>
+                </div>
+                <div className="flex items-center gap-1">
+                  <h2 className="font-semibold">Assigned To: </h2>
+                  <h2>{t.assignedTo.name}</h2>
+                </div>
               </div>
             ))
           ) : (
